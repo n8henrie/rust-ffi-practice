@@ -1,20 +1,21 @@
+extern crate bindgen;
+
 use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    println!("cargo:rerun-if-changed=wrapper.h");
-    let src = ["vendor/cpplib/bar.cpp"];
+    println!("cargo:rerun-if-changed=vendor/proj.h");
 
-    cc::Build::new()
-        .cpp(true)
-        .files(src.iter())
-        .compile("mybar");
+    println!("cargo:rustc-link-search=./vendor");
+    println!("cargo:rustc-link-lib=proj");
 
     let bindings = bindgen::Builder::default()
-        .header("wrapper.h")
-        .clang_arg("-xc++")
-        .clang_arg("-Ivendor/cpplib")
-        // .allowlist_function("barfunc")
+        .header("vendor/proj.h")
+        .clang_args(["-xc++", "-std=c++17"])
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .opaque_type("std::.*")
+        .allowlist_type("Configuration")
+        .allowlist_var("config")
         .generate()
         .expect("Unable to generate bindings");
 

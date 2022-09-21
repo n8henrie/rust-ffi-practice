@@ -1,16 +1,11 @@
 [package]
-name = "practice"
+name = "foo"
 version = "0.1.0"
 edition = "2021"
-authors = ["Nathan Henrie <nate@n8henrie.com>"]
-readme = "README.md"
-license = "MIT"
-repository = "https://github.com/n8henrie/rust-ffi-practice"
-homepage = "https://n8henrie.com/2021/11/the-simplest-rust-c-ffi-example/"
-description = "https://n8henrie.com/2021/11/the-simplest-rust-c-ffi-example/"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.59"
-cc = "1"
+bindgen = "0.60.1"
