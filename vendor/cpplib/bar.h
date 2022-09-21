@@ -1,2 +1,0 @@
-int barfunc();
-int unused();
